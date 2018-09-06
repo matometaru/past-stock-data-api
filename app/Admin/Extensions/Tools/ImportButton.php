@@ -19,12 +19,14 @@ class ImportButton extends AbstractTool
 
 function handleFileSelect(evt) {
     var file = evt.target.files; // FileList object
-
-    document.getElementById('input').style.display="none";
-    document.getElementById('confirm').style.display="block";
+    var fileName = file[0].name;
+    
+    $('#input').hide();
+    $('#confirm').show();
+    $('#confirm .text').text(fileName);
 }
 
-document.getElementById('files').addEventListener('change', handleFileSelect, false);
+$('#files').on('change', handleFileSelect);
 
 $('#confirm').on('click', function() {
 
@@ -42,7 +44,7 @@ $('#confirm').on('click', function() {
         contentType: false,
         success: function () {
             $.pjax.reload('#pjax-container');
-            toastr.success('操作成功');
+            toastr.success('アップロード成功');
         }
     });
 });
@@ -66,26 +68,18 @@ SCRIPT;
 
         return <<<EOT
 
-<div class="btn-group pull-right" style="margin-right: 10px">
-    <label>
+<div class="pull-right" style="margin-right: 10px">
+    <label id="input">
         <span class="btn btn-sm btn-twitter">
-            <span id="input"><i class="fa fa-upload"></i> {$import}</span>
-            <span id="confirm" style="display:none"><i class="fa fa-upload"></i> 確定</span>
+            <span><i class="fa fa-upload"></i> {$import}</span>
             <input type="file" id="files" name="csvfile" style="display:none">
         </span>
     </label>
+    <span id="confirm" class="btn btn-sm btn-twitter" style="display:none">
+        <span><i class="fa fa-upload"></i> <span class="text"></span></span>
+    </span>
 </div>
 EOT;
 
-    }
-
-    /**
-     * Get Import Url
-     *
-     * @return string
-     */
-    public function getImporttUrl($string)
-    {
-        return $string;
     }
 }

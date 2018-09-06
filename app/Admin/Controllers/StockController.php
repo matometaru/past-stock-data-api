@@ -160,28 +160,16 @@ class StockController extends Controller
      */
     protected function import(Content $content, Request $request)
     {
-        // $name = $request->input('name');
-        // $file = $request->input('file');
-        // $path = $request->file('file')->storeAs(
-        //     'avatars', 'your_filename', 'public'
-        // );
-        // return $content
-        //     ->body($path);
-
         $file = $request->file('file');
         $reader = Excel::load($file->getRealPath());
 
         $rows = $reader->toArray();
 
-        print_r($rows);
-
         foreach ($rows as $row){
-            // $record = $this->stock->firstOrNew(['code' => $row['code']]);
-            // if ($record->wasRecentlyCreated) {
-            $this->stock->fill($row)->save();
-            // $record->fill($row)->save();
-            // }
+            // firstOrNewで条件に合致したものがあればfirst()で取得し、なければnewでインスタンス生成
+            $record = $this->stock->firstOrNew(['code' => $row['code']]);
+            $record->fill($row)->save();
         }
-        // return redirect()->action('StockController@index');
+        return redirect('admin/stocks');
     }
 }
