@@ -95,7 +95,7 @@ class StockController extends Controller
         $grid->name('Name');
         $grid->color('Color');
         $grid->url('Url');
-        $grid->markert('Markert');
+        $grid->market('Markert');
         $grid->category('Category');
         $grid->listing_date('Listing date');
         $grid->delisting_date('Delisting date');
@@ -124,7 +124,7 @@ class StockController extends Controller
         $show->name('Name');
         $show->color('Color');
         $show->url('Url');
-        $show->markert('Markert');
+        $show->market('Markert');
         $show->category('Category');
         $show->listing_date('Listing date');
         $show->delisting_date('Delisting date');
@@ -147,10 +147,23 @@ class StockController extends Controller
         $form->text('name', 'Name');
         $form->color('color', 'Color');
         $form->url('url', 'Url');
-        $form->switch('markert', 'Markert');
-        $form->switch('category', 'Category');
+        // $form->number('market', 'Markert')->max(10);
+        $form->number('category', 'Category')->max(33);
         $form->date('listing_date', 'Listing date')->default(date('Y-m-d'));
         $form->date('delisting_date', 'Delisting date')->default(date('Y-m-d'));
+
+        $form->select('market')->options([
+            1 => '東証1部',
+            2 => '東証2部',
+            3 => 'マザーズ',
+            4 => 'JASDAQスタンダード',
+            5 => 'JASDAQグロース', 
+            6 => '名証1部',
+            7 => '名証2部',
+            8 => '名証セントレックス',
+            9 => '札証',
+            10 => '福証'
+        ]);
 
         return $form;
     }
