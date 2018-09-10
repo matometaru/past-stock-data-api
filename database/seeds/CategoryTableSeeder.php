@@ -55,7 +55,6 @@ class CategoryTableSeeder extends Seeder
 
         foreach ($categories as $key => $value) {
             $param = [
-                'category_id' => $key,
                 'name' => $value,
             ];
             DB::table('categories')->insert($param);
