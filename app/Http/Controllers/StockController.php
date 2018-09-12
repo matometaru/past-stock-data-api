@@ -43,12 +43,13 @@ class StockController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $code
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($code)
     {
-        //
+        $stock = Stock::where('code', $code)->first();
+        return Response::json($stock);
     }
 
     /**
