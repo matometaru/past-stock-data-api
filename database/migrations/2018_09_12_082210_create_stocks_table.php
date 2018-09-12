@@ -15,6 +15,14 @@ class CreateStocksTable extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('code', 4);
+            $table->string('name');
+            $table->char('color', 7)->nullable();;
+            $table->string('url')->nullable();;
+            $table->integer('market_id');
+            $table->integer('category_id');
+            $table->date('listing_date')->nullable();;
+            $table->date('delisting_date')->nullable();;
             $table->timestamps();
         });
     }

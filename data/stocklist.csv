@@ -1,4 +1,4 @@
-﻿code,name,market,category,color,url,listing_date,delisting_date
+﻿code,name,market_id,category_id,color,url,listing_date,delisting_date
 1301,極洋,1,1,#F90000,https://www.kyokuyo.co.jp/,,
 1332,日本水産,1,1,#F90000,http://www.nissui.co.jp/,,
 1333,マルハニチロ,1,1,#E80000,https://www.maruha-nichiro.co.jp/home.html,,

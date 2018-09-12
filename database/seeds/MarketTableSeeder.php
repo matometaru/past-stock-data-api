@@ -17,7 +17,7 @@ class MarketTableSeeder extends Seeder
         //削除
         Market::truncate();
 
-        $categories = [
+        $markets = [
             1 => '東証1部',
             2 => '東証2部',
             3 => 'マザーズ',
@@ -30,11 +30,11 @@ class MarketTableSeeder extends Seeder
             10 => '福証'
         ];
 
-        foreach ($categories as $key => $value) {
+        foreach ($markets as $key => $value) {
             $param = [
                 'name' => $value,
             ];
-            DB::table('categories')->insert($param);
+            DB::table('markets')->insert($param);
         }
 
     }

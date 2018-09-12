@@ -3,6 +3,8 @@
 namespace App\Admin\Controllers;
 
 use App\Stock;
+use App\Market;
+use App\Category;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -90,17 +92,23 @@ class StockController extends Controller
     {
         $grid = new Grid(new Stock);
 
+        // dd($grid);
+
         $grid->id('Id');
         $grid->code('Code');
         $grid->name('Name');
         $grid->color('Color');
         $grid->url('Url');
-        $grid->market('Markert');
-        $grid->category('Category');
-        $grid->listing_date('Listing date');
-        $grid->delisting_date('Delisting date');
-        $grid->created_at('Created at');
-        $grid->updated_at('Updated at');
+        $grid->market()->display(function($market) {
+            return $market['name'];
+        });
+        $grid->category()->display(function($category) {
+            return $category['name'];
+        });
+        // $grid->listing_date('Listing date');
+        // $grid->delisting_date('Delisting date');
+        // $grid->created_at('Created at');
+        // $grid->updated_at('Updated at');
 
         $grid->tools(function ($tools) {
             $tools->append(new ImportButton());
@@ -148,11 +156,11 @@ class StockController extends Controller
         $form->color('color', 'Color');
         $form->url('url', 'Url');
         // $form->number('market', 'Markert')->max(10);
-        $form->number('category', 'Category')->max(33);
+        $form->number('category_id', 'Category')->max(33);
         $form->date('listing_date', 'Listing date')->default(date('Y-m-d'));
         $form->date('delisting_date', 'Delisting date')->default(date('Y-m-d'));
 
-        $form->select('market')->options([
+        $form->select('market_id')->options([
             1 => '東証1部',
             2 => '東証2部',
             3 => 'マザーズ',
