@@ -48,7 +48,7 @@ class StockController extends Controller
      */
     public function show($code)
     {
-        $stock = Stock::where('code', $code)->first()->categoryName();
+        $stock = Stock::where('code', $code)->first();
         return Response::json($stock);
     }
 

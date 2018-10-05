@@ -13,6 +13,7 @@ use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use App\Admin\Extensions\Tools\UserGender;
 use App\Admin\Extensions\Tools\ImportButton;
+use App\Admin\Extensions\CsvExporter;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -92,9 +93,7 @@ class StockController extends Controller
     {
         $grid = new Grid(new Stock);
 
-        // dd($grid);
-
-        $grid->id('Id');
+        $grid->id('ida');
         $grid->code('Code');
         $grid->name('Name');
         $grid->color('Color');
@@ -105,14 +104,12 @@ class StockController extends Controller
         $grid->category()->display(function($category) {
             return $category['name'];
         });
-        // $grid->listing_date('Listing date');
-        // $grid->delisting_date('Delisting date');
-        // $grid->created_at('Created at');
-        // $grid->updated_at('Updated at');
 
         $grid->tools(function ($tools) {
             $tools->append(new ImportButton());
         });
+
+        $grid->exporter(new CsvExpoter());
 
         return $grid;
     }
@@ -127,7 +124,7 @@ class StockController extends Controller
     {
         $show = new Show(Stock::findOrFail($id));
 
-        $show->id('Id');
+        $show->id('id');
         $show->code('Code');
         $show->name('Name');
         $show->color('Color');
