@@ -13,7 +13,7 @@ use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use App\Admin\Extensions\Tools\UserGender;
 use App\Admin\Extensions\Tools\ImportButton;
-use App\Admin\Extensions\CsvExporter;
+use App\Admin\Extensions\CsvCustomExporter;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -109,7 +109,7 @@ class StockController extends Controller
             $tools->append(new ImportButton());
         });
 
-        $grid->exporter(new CsvExpoter());
+        $grid->exporter(new CsvCustomExporter());
 
         return $grid;
     }
