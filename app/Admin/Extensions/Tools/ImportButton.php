@@ -36,9 +36,12 @@ $('#confirm').on('click', function() {
     }
     formData.append("_token", LA.token);
 
+    var parser = new URL(location.href);
+    var url = parser.pathname + '/csv/import';
+
     $.ajax({
         method: 'post',
-        url: '/admin/stocks/csv/import',
+        url: url,
         data: formData,
         processData: false,
         contentType: false,

@@ -12,6 +12,8 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
     $router->resource('stocks', StockController::class);
+    $router->resource('datasets', DatasetController::class);
     $router->post('stocks/csv/import', 'StockController@import');
+    $router->post('datasets/csv/import', 'DatasetController@import');
 
 });

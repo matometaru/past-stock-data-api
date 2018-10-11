@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Dataset;
 use App\Stock;
 use App\Market;
 use App\Category;
@@ -17,13 +18,13 @@ use App\Admin\Extensions\CsvCustomExporter;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
-class StockController extends Controller
+class DatasetController extends Controller
 {
     use HasResourceActions;
 
-    public function __construct(Stock $stock)
+    public function __construct(Dataset $dataset)
     {
-        $this->stock = $stock;
+        $this->dataset = $dataset;
     }
 
     /**
@@ -91,25 +92,22 @@ class StockController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Stock);
+        $grid = new Grid(new Dataset);
 
         $grid->id('id');
-        $grid->code('Code');
-        $grid->name('Name');
-        $grid->color('Color');
-        $grid->url('Url');
-        $grid->market()->display(function($market) {
-            return $market['name'];
-        });
-        $grid->category()->display(function($category) {
-            return $category['name'];
-        });
+        $grid->code('code');
+        $grid->date('date');
+        $grid->total('total');
+        $grid->open('open');
+        $grid->high('high');
+        $grid->low('low');
+        $grid->close('close');
+        $grid->volume('volume');
+        $grid->close_adj('close_adj');
 
         $grid->tools(function ($tools) {
             $tools->append(new ImportButton());
         });
-
-        $grid->exporter(new CsvCustomExporter());
 
         return $grid;
     }
@@ -122,16 +120,18 @@ class StockController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Stock::findOrFail($id));
+        $show = new Show(Dataset::findOrFail($id));
 
         $show->id('id');
-        $show->code('Code');
-        $show->name('Name');
-        $show->color('Color');
-        $show->url('Url');
-        $show->market('Markert');
-        $show->category('Category');
-        $show->listing_date('Listing date');
+        $show->code('code');
+        $show->date('date');
+        $show->total('total');
+        $show->open('open');
+        $show->high('high');
+        $show->low('low');
+        $show->close('close');
+        $show->volume('volume');
+        $show->close_adj('close_adj');
         $show->delisting_date('Delisting date');
         $show->created_at('Created at');
         $show->updated_at('Updated at');
@@ -146,29 +146,19 @@ class StockController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Stock);
+        $form = new Form(new Dataset);
 
         $form->number('code', 'Code');
-        $form->text('name', 'Name');
-        $form->color('color', 'Color');
-        $form->url('url', 'Url');
-        // $form->number('market', 'Markert')->max(10);
-        $form->number('category_id', 'Category')->max(33);
+        $form->date('date', 'Date')->default(date('Y-m-d'));
+        $form->number('total', 'Total');
+        $form->number('open', 'Open');
+        $form->number('high', 'High');
+        $form->number('low', 'Low');
+        $form->number('close', 'Close');
+        $form->number('volume', 'Volume');
+        $form->number('close_adj', 'Close adjust');
         $form->date('listing_date', 'Listing date')->default(date('Y-m-d'));
         $form->date('delisting_date', 'Delisting date')->default(date('Y-m-d'));
-
-        $form->select('market_id')->options([
-            1 => '東証1部',
-            2 => '東証2部',
-            3 => 'マザーズ',
-            4 => 'JASDAQスタンダード',
-            5 => 'JASDAQグロース', 
-            6 => '名証1部',
-            7 => '名証2部',
-            8 => '名証セントレックス',
-            9 => '札証',
-            10 => '福証'
-        ]);
 
         return $form;
     }
@@ -185,9 +175,10 @@ class StockController extends Controller
 
         foreach ($rows as $row){
             // firstOrNewで条件に合致したものがあればfirst()で取得し、なければnewでインスタンス生成
-            $record = $this->stock->firstOrNew(['code' => $row['code']]);
+            $record = $this->dataset->firstOrNew(['code' => $row['code'],'date' => $row['date']]);
             $record->fill($row)->save();
         }
-        return redirect('admin/stocks');
+        return redirect('admin/datasets');
     }
+
 }
