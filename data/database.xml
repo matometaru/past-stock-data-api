@@ -106,25 +106,32 @@
 <default>NULL</default></row>
 <row name="total" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="asset" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
+<default>NULL</default><comment>発行済株式数</comment>
+</row>
 <row name="open" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+<default>NULL</default><comment>始値</comment>
+</row>
 <row name="high" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+<default>NULL</default><comment>高値</comment>
+</row>
 <row name="low" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+<default>NULL</default><comment>安値</comment>
+</row>
 <row name="close" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+<default>NULL</default><comment>終値</comment>
+</row>
 <row name="volume" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+<default>NULL</default><comment>出来高</comment>
+</row>
+<row name="close_adj" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><comment>終値調整</comment>
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
