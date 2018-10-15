@@ -104,10 +104,6 @@
 <row name="date" null="1" autoincrement="0">
 <datatype>DATE</datatype>
 <default>NULL</default></row>
-<row name="total" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><comment>発行済株式数</comment>
-</row>
 <row name="open" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><comment>始値</comment>
@@ -157,5 +153,28 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
+</table>
+<table x="602" y="401" name="shares">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="code" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="date" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="total" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><comment>株式総数</comment>
+</row>
+<row name="comment" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><comment>株式増加した理由など</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>発行済株式数</comment>
 </table>
 </sql>

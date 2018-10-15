@@ -148,7 +148,6 @@ class DatasetController extends Controller
     {
         $form = new Form(new Dataset);
 
-        $form->number('code', 'Code');
         $form->date('date', 'Date')->default(date('Y-m-d'));
         $form->number('total', 'Total');
         $form->number('open', 'Open');
@@ -157,8 +156,6 @@ class DatasetController extends Controller
         $form->number('close', 'Close');
         $form->number('volume', 'Volume');
         $form->number('close_adj', 'Close adjust');
-        $form->date('listing_date', 'Listing date')->default(date('Y-m-d'));
-        $form->date('delisting_date', 'Delisting date')->default(date('Y-m-d'));
 
         return $form;
     }
